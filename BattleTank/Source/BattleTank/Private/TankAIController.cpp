@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
-#include "TankAIController.h"
+#include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/TankAIController.h"
 
 
 void ATankAIController::BeginPlay()

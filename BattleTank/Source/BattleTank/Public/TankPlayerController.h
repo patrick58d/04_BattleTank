@@ -19,6 +19,12 @@ public:
 	
 	void BeginPlay() override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
+	//Start the tank moving the barrel so that a shot would it where
+	//the cross hair intersects the world
+	void AimTowardsCrossHair();
 	
-	
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+
 };
