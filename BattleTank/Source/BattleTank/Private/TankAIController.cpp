@@ -17,6 +17,12 @@ void ATankAIController::BeginPlay()
 	UE_LOG(LogTemp, Warning, TEXT("AI Tank found player: %s"), *(PlayerTank->GetName()));
 }
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AimAtPlayer();
+}
+
 ATank * ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -28,3 +34,14 @@ ATank* ATankAIController::GetPlayerTank() const
 	if (!PlayerPawn) { return nullptr; }
 	return Cast<ATank>(PlayerPawn);
 }
+
+void ATankAIController::AimAtPlayer() const
+{
+	if (!GetPlayerTank()) { return; }
+		// TODO Move towards the player
+
+		// Aim Towards the player
+	
+	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation()); //How is AimAt getting the owner name I need to figure this out??
+}
+

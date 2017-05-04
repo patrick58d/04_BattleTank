@@ -26,20 +26,19 @@ private:
 	void AimTowardsCrossHair();
 	
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
-	
-	//Distance Across Horizontal Screen Space
-	UPROPERTY(EditAnywhere)
-	float CrossHairXLocation = 0.5f;
-	
-	//Distance Down Screen Space
-	UPROPERTY(EditAnywhere)
-	float CrossHairYLocation = 0.33333f;
-	
-	UPROPERTY(EditAnywhere)
-	float LineTraceRange = 1000000.f;
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 	
+	//Distance Across Horizontal Screen Space
+	UPROPERTY(EditAnywhere)
+		float CrossHairXLocation = 0.5f;
+
+	//Distance Down Screen Space
+	UPROPERTY(EditAnywhere)
+		float CrossHairYLocation = 0.33333f;
+
+	UPROPERTY(EditAnywhere)
+		float LineTraceRange = 1000000.f;
 };
