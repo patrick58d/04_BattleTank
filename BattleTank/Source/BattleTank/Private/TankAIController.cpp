@@ -2,6 +2,7 @@
 
 #include "BattleTank.h"
 #include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/TankAIController.h"
+#include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/Tank.h"
 
 
 void ATankAIController::BeginPlay()

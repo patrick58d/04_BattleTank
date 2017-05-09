@@ -4,10 +4,16 @@
 #include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/TankBarrel.h"
 
 
-void UTankBarrel::Elevate(float DegreesPerSecond)
+void UTankBarrel::Elevate(float RelativeSpeed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Barrel-Elevate() called at speed %f"), DegreesPerSecond);
 	// Move the Barrel the right about this frame
 	// Given a max elevation speed, and the frame time
+	auto RelativeSpeedClamped = FMath::Clamp<float>(RelativeSpeed, -1, +1);
+
+	auto ElevationChange = RelativeSpeedClamped * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
+	auto RawNewElevation = RelativeRotation.Pitch + ElevationChange;
+	auto Elevation = FMath::Clamp<float>(RawNewElevation, MinElevation, MaxElevation);
+
+	SetRelativeRotation(FRotator(Elevation, 0, 0));
 }
 
