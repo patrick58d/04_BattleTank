@@ -2,8 +2,10 @@
 
 
 #include "BattleTank.h"
-#include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/Tank.h"
+#include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/Projectile.h"
 #include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/TankAimingComponent.h"
+#include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/TankBarrel.h"
+#include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/Tank.h"
 
 // Sets default values
 ATank::ATank()
@@ -18,11 +20,27 @@ ATank::ATank()
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+void ATank::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Tank Fired"), Time);
+
+	if (!Barrel) { return; }
+
+	GetWorld()->SpawnActor<AProjectile>(
+		ProjectileBlueprint,
+		Barrel->GetSocketLocation(FName("Projectile")),
+		Barrel->GetSocketRotation(FName("Projectile"))
+		);
+	// Spawn a Projectile at the socket location
 }
 
 // Called when the game starts or when spawned
