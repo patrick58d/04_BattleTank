@@ -22,7 +22,7 @@ class BATTLETANK_API ATankAIController : public AAIController
 private:	
 	
 	// How close can the AI tank get to the player
-	float AcceptanceRadius = 3000;
+	float AcceptanceRadius = 300;
 
 	
 };

@@ -2,13 +2,22 @@
 
 #include "BattleTank.h"
 #include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/Tank.h"
+#include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/TankAimingComponent.h"
 #include "G:/repos/04_BattleTanks/BattleTank/Source/BattleTank/Public/TankPlayerController.h"
 
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	auto AimingComponent = GetControlledTank()->FindComponentByClass <UTankAimingComponent>();
+	if (ensure(AimingComponent))
+	{
+		FoundAimingComponent(AimingComponent);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Controller cant find aiming component at Begin Play"))
+	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -24,7 +33,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 
 void ATankPlayerController::AimTowardsCrossHair()
 {
-	if (!GetControlledTank()) { return; }
+	if (!ensure(GetControlledTank())) { return; }
 
 	FVector HitLocation; // Out Parameter
 	if (GetSightRayHitLocation((HitLocation))) // Has "side-effect, is going to line-trace

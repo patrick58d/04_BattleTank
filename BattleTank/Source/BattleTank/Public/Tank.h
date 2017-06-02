@@ -17,45 +17,32 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Firing)
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
 	void AimAt(FVector HitLocation);
 
 protected:
-	UTankAimingComponent* TankAimingComponent = nullptr; //Pointer to Tank Aiming Component
-
+	UTankAimingComponent* TankAimingComponent = nullptr;
+	
 	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr; 
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:
 	// Sets default values for this pawn's properties
 	ATank();
-
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-	// Called to bind functionality to input
 	
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000.f; // 
 	
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
 	// Local barrel reference for spawning projectile
-	UTankBarrel* Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr; // TODO Remove this reference 
 
 	double LastFireTime = 0; // getter for the last time a shot was fired
 	
